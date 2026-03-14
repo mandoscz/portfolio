@@ -440,12 +440,22 @@
             <span>Česká republika</span>
           </div>
         </div>
-        <form onsubmit="return false;">
-          <input type="text" placeholder="Vaše jméno" autocomplete="name" />
-          <input type="email" placeholder="Váš e-mail" autocomplete="email" />
-          <textarea placeholder="Vaše zpráva"></textarea>
-          <button type="submit" class="btn btn-primary">Odeslat zprávu</button>
+        <form id="contact-form" onsubmit="sendEmail(event)">
+          <input type="text" id="form-name" placeholder="Vaše jméno" autocomplete="name" required />
+          <textarea id="form-message" placeholder="Vaše zpráva" required></textarea>
+          <button type="submit" class="btn btn-primary">Napište mi</button>
         </form>
+        <script>
+          function sendEmail(e) {
+            e.preventDefault();
+            var name = document.getElementById('form-name').value.trim();
+            var message = document.getElementById('form-message').value.trim();
+            var body = 'Jméno: ' + name + '\n\n' + message;
+            window.location.href = 'mailto:radek@radekdobias.cz'
+              + '?subject=' + encodeURIComponent('Dotaz z portfolia')
+              + '&body=' + encodeURIComponent(body);
+          }
+        </script>
       </div>
     </div>
   </section>
