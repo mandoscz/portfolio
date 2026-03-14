@@ -1,0 +1,459 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Radek Dobiáš – Terapeut, Konzultant, Železniční technologie</title>
+  <meta name="description" content="Radek Dobiáš – terapeut, konzultant a odborník na železniční technologie." />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --bg: #0f1117;
+      --surface: #1a1d27;
+      --border: #2a2d3a;
+      --accent: #4f8ef7;
+      --accent2: #7c5cbf;
+      --text: #e8eaf0;
+      --muted: #8b90a0;
+      --radius: 12px;
+    }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+      line-height: 1.65;
+    }
+
+    /* NAV */
+    nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 100;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background: rgba(15,17,23,0.85);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    nav .logo {
+      font-size: 1.1rem;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+      color: var(--text);
+      text-decoration: none;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav ul a {
+      color: var(--muted);
+      text-decoration: none;
+      font-size: 0.9rem;
+      transition: color 0.2s;
+    }
+
+    nav ul a:hover { color: var(--text); }
+
+    /* HERO */
+    .hero {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 6rem 1.5rem 4rem;
+      background: radial-gradient(ellipse at 50% 0%, rgba(79,142,247,0.12) 0%, transparent 70%);
+    }
+
+    .hero-inner { max-width: 700px; }
+
+    .hero-tag {
+      display: inline-block;
+      background: rgba(79,142,247,0.12);
+      color: var(--accent);
+      border: 1px solid rgba(79,142,247,0.3);
+      border-radius: 999px;
+      padding: 0.3rem 1rem;
+      font-size: 0.8rem;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 6vw, 4.5rem);
+      font-weight: 800;
+      line-height: 1.1;
+      margin-bottom: 1.25rem;
+      letter-spacing: -0.02em;
+    }
+
+    .hero h1 span {
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .hero p {
+      color: var(--muted);
+      font-size: 1.15rem;
+      max-width: 520px;
+      margin: 0 auto 2.5rem;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.75rem 1.75rem;
+      border-radius: var(--radius);
+      font-size: 0.95rem;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.2s;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--accent);
+      color: #fff;
+    }
+
+    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
+
+    .btn-outline {
+      border: 1px solid var(--border);
+      color: var(--text);
+      background: transparent;
+    }
+
+    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    /* SECTIONS */
+    section {
+      padding: 5rem 1.5rem;
+    }
+
+    .container {
+      max-width: 960px;
+      margin: 0 auto;
+    }
+
+    .section-label {
+      font-size: 0.75rem;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--accent);
+      margin-bottom: 0.75rem;
+    }
+
+    .section-title {
+      font-size: clamp(1.75rem, 4vw, 2.5rem);
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      margin-bottom: 1rem;
+    }
+
+    .section-desc {
+      color: var(--muted);
+      max-width: 560px;
+      margin-bottom: 3rem;
+      font-size: 1.05rem;
+    }
+
+    /* ABOUT */
+    #about {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 1.05rem;
+    }
+
+    .about-stats {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1.5rem;
+    }
+
+    .stat {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 1.5rem;
+    }
+
+    .stat-num {
+      font-size: 2.25rem;
+      font-weight: 800;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      line-height: 1;
+      margin-bottom: 0.4rem;
+    }
+
+    .stat-label {
+      font-size: 0.85rem;
+      color: var(--muted);
+    }
+
+    /* SERVICES */
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .card {
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: var(--radius);
+      padding: 2rem;
+      transition: border-color 0.2s, transform 0.2s;
+    }
+
+    .card:hover {
+      border-color: var(--accent);
+      transform: translateY(-3px);
+    }
+
+    .card-icon {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+    }
+
+    .card h3 {
+      font-size: 1.15rem;
+      font-weight: 700;
+      margin-bottom: 0.6rem;
+    }
+
+    .card p {
+      color: var(--muted);
+      font-size: 0.95rem;
+    }
+
+    /* CONTACT */
+    #contact {
+      background: var(--surface);
+      border-top: 1px solid var(--border);
+    }
+
+    .contact-inner {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+    }
+
+    .contact-info p {
+      color: var(--muted);
+      margin-bottom: 1.5rem;
+    }
+
+    .contact-item {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      color: var(--muted);
+      margin-bottom: 1rem;
+      font-size: 0.95rem;
+    }
+
+    .contact-item span:first-child { font-size: 1.2rem; }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    input, textarea {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 0.8rem 1rem;
+      color: var(--text);
+      font-size: 0.95rem;
+      font-family: inherit;
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+    }
+
+    input:focus, textarea:focus { border-color: var(--accent); }
+    textarea { resize: vertical; min-height: 140px; }
+
+    /* FOOTER */
+    footer {
+      padding: 2rem 1.5rem;
+      text-align: center;
+      color: var(--muted);
+      font-size: 0.85rem;
+      border-top: 1px solid var(--border);
+    }
+
+    footer a { color: var(--muted); text-decoration: none; }
+    footer a:hover { color: var(--text); }
+
+    /* RESPONSIVE */
+    @media (max-width: 680px) {
+      nav ul { gap: 1.2rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .contact-inner { grid-template-columns: 1fr; }
+      .about-stats { grid-template-columns: 1fr 1fr; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- NAV -->
+  <nav>
+    <a href="#" class="logo">Radek Dobiáš</a>
+    <ul>
+      <li><a href="#about">O mně</a></li>
+      <li><a href="#services">Služby</a></li>
+      <li><a href="#contact">Kontakt</a></li>
+    </ul>
+  </nav>
+
+  <!-- HERO -->
+  <section class="hero">
+    <div class="hero-inner">
+      <div class="hero-tag">radekdobias.cz</div>
+      <h1>Radek <span>Dobiáš</span></h1>
+      <p>Terapeut, konzultant a odborník na železniční technologie. Pomáhám lidem i organizacím dosahovat jejich cílů.</p>
+      <div class="hero-actions">
+        <a href="#services" class="btn btn-primary">Moje služby</a>
+        <a href="#contact" class="btn btn-outline">Kontaktovat</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT -->
+  <section id="about">
+    <div class="container">
+      <div class="about-grid">
+        <div class="about-text">
+          <div class="section-label">O mně</div>
+          <h2 class="section-title">Zkušenosti napříč obory</h2>
+          <p>Jsem profesionál s bohatými zkušenostmi v oblasti terapie, poradenství a železničních technologií. Kombinuji odborné znalosti s empatickým přístupem.</p>
+          <p>Mým cílem je přinášet skutečnou hodnotu – ať už jde o práci s lidmi v terapeutickém procesu, strategické poradenství firmám, nebo technické projekty v železničním průmyslu.</p>
+          <a href="#contact" class="btn btn-primary" style="margin-top:1rem;">Spojme se</a>
+        </div>
+        <div class="about-stats">
+          <div class="stat">
+            <div class="stat-num">10+</div>
+            <div class="stat-label">let zkušeností</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">3</div>
+            <div class="stat-label">oblasti odbornosti</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">100+</div>
+            <div class="stat-label">spokojených klientů</div>
+          </div>
+          <div class="stat">
+            <div class="stat-num">ČR</div>
+            <div class="stat-label">působiště</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- SERVICES -->
+  <section id="services">
+    <div class="container">
+      <div class="section-label">Služby</div>
+      <h2 class="section-title">Čím mohu pomoci</h2>
+      <p class="section-desc">Nabízím profesionální služby ve třech klíčových oblastech – vždy s osobním přístupem a zaměřením na výsledek.</p>
+      <div class="cards">
+        <div class="card">
+          <div class="card-icon">🧠</div>
+          <h3>Terapie</h3>
+          <p>Individuální terapeutická práce zaměřená na osobní rozvoj, zvládání náročných životních situací a duševní pohodu.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">💼</div>
+          <h3>Konzultace</h3>
+          <p>Strategické poradenství pro jednotlivce i firmy. Pomáhám nacházet efektivní řešení a nastavovat správné procesy.</p>
+        </div>
+        <div class="card">
+          <div class="card-icon">🚆</div>
+          <h3>Železniční technologie</h3>
+          <p>Odborná expertíza v oblasti železničních technologií – technické konzultace, projekty a analýzy pro železniční sektor.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT -->
+  <section id="contact">
+    <div class="container">
+      <div class="contact-inner">
+        <div class="contact-info">
+          <div class="section-label">Kontakt</div>
+          <h2 class="section-title">Ozvěte se mi</h2>
+          <p>Máte zájem o spolupráci nebo chcete zjistit více informací? Neváhejte mě kontaktovat.</p>
+          <div class="contact-item">
+            <span>📧</span>
+            <a href="mailto:radek@radekdobias.cz" style="color:inherit;text-decoration:none;">radek@radekdobias.cz</a>
+          </div>
+          <div class="contact-item">
+            <span>🌐</span>
+            <span>radekdobias.cz</span>
+          </div>
+          <div class="contact-item">
+            <span>📍</span>
+            <span>Česká republika</span>
+          </div>
+        </div>
+        <form onsubmit="return false;">
+          <input type="text" placeholder="Vaše jméno" autocomplete="name" />
+          <input type="email" placeholder="Váš e-mail" autocomplete="email" />
+          <textarea placeholder="Vaše zpráva"></textarea>
+          <button type="submit" class="btn btn-primary">Odeslat zprávu</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2026 Radek Dobiáš &nbsp;·&nbsp; <a href="https://radekdobias.cz">radekdobias.cz</a></p>
+  </footer>
+
+</body>
+</html>
