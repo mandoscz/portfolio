@@ -440,21 +440,52 @@
             <span>Česká republika</span>
           </div>
         </div>
-        <form id="contact-form" onsubmit="sendEmail(event)">
+        <form id="contact-form">
           <input type="text" id="form-name" placeholder="Vaše jméno" autocomplete="name" required />
+          <input type="email" id="form-email" placeholder="Váš e-mail" autocomplete="email" required />
           <textarea id="form-message" placeholder="Vaše zpráva" required></textarea>
-          <button type="submit" class="btn btn-primary">Napište mi</button>
+          <button type="submit" id="form-submit" class="btn btn-primary">Odeslat zprávu</button>
+          <div id="form-status" style="display:none;margin-top:0.75rem;padding:0.8rem 1rem;border-radius:8px;font-size:0.95rem;"></div>
         </form>
         <script>
-          function sendEmail(e) {
+          document.getElementById('contact-form').addEventListener('submit', function(e) {
             e.preventDefault();
-            var name = document.getElementById('form-name').value.trim();
-            var message = document.getElementById('form-message').value.trim();
-            var body = 'Jméno: ' + name + '\n\n' + message;
-            window.location.href = 'mailto:radek@radekdobias.cz'
-              + '?subject=' + encodeURIComponent('Dotaz z portfolia')
-              + '&body=' + encodeURIComponent(body);
-          }
+            var btn = document.getElementById('form-submit');
+            var status = document.getElementById('form-status');
+            var data = new FormData();
+            data.append('name',    document.getElementById('form-name').value.trim());
+            data.append('email',   document.getElementById('form-email').value.trim());
+            data.append('message', document.getElementById('form-message').value.trim());
+
+            btn.disabled = true;
+            btn.textContent = 'Odesílám…';
+            status.style.display = 'none';
+
+            fetch('send.php', { method: 'POST', body: data })
+              .then(function(r) { return r.json(); })
+              .then(function(res) {
+                if (res.ok) {
+                  status.style.background = 'rgba(79,142,247,0.12)';
+                  status.style.border = '1px solid rgba(79,142,247,0.3)';
+                  status.style.color = '#4f8ef7';
+                  status.textContent = '✓ Zpráva byla odeslána. Ozvu se co nejdříve!';
+                  document.getElementById('contact-form').reset();
+                } else {
+                  throw new Error(res.error || 'Chyba');
+                }
+              })
+              .catch(function(err) {
+                status.style.background = 'rgba(220,53,69,0.12)';
+                status.style.border = '1px solid rgba(220,53,69,0.3)';
+                status.style.color = '#f07070';
+                status.textContent = '✗ Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.';
+              })
+              .finally(function() {
+                btn.disabled = false;
+                btn.textContent = 'Odeslat zprávu';
+                status.style.display = 'block';
+              });
+          });
         </script>
       </div>
     </div>
