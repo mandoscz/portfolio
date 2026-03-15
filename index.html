@@ -366,11 +366,15 @@
     }
 
     /* striedajici pomery stran pro masonry efekt */
-    .gallery-item:nth-child(3n+1) .photo { aspect-ratio: 3/4; }
-    .gallery-item:nth-child(3n+2) .photo { aspect-ratio: 4/3; }
-    .gallery-item:nth-child(3n)   .photo { aspect-ratio: 1/1; }
+    .gallery-item:nth-child(3n+1) .photo,
+    .gallery-item:nth-child(3n+1) img { aspect-ratio: 3/4; }
+    .gallery-item:nth-child(3n+2) .photo,
+    .gallery-item:nth-child(3n+2) img { aspect-ratio: 4/3; }
+    .gallery-item:nth-child(3n) .photo,
+    .gallery-item:nth-child(3n) img   { aspect-ratio: 1/1; }
 
     .gallery-item .photo { width: 100%; border: none; }
+    .gallery-item img { width: 100%; display: block; object-fit: cover; }
 
     .gallery-caption {
       padding: 0.55rem 0 0;
@@ -726,11 +730,11 @@
       <h2 class="section-title reveal">Svět jako způsob<br>poznání.</h2>
       <div class="gallery reveal reveal-d1">
         <div class="gallery-item">
-          <div class="photo"></div>
+          <img src="assets/images/2004-02-26%2001.JPG" alt="Nový Zéland" loading="lazy" />
           <div class="gallery-caption">Nový Zéland</div>
         </div>
         <div class="gallery-item">
-          <div class="photo"></div>
+          <img src="assets/images/2011-02-17%2012.50.36.JPG" alt="Maroko" loading="lazy" />
           <div class="gallery-caption">Maroko</div>
         </div>
         <div class="gallery-item">
@@ -742,16 +746,16 @@
           <div class="gallery-caption">Velká Čínská zeď</div>
         </div>
         <div class="gallery-item">
-          <div class="photo"></div>
+          <img src="assets/images/2009-09-11%2012.19.18.JPG" alt="Černobylská elektrárna" loading="lazy" />
           <div class="gallery-caption">Černobylská elektrárna</div>
         </div>
         <div class="gallery-item">
-          <div class="photo"></div>
-          <div class="gallery-caption">Skotsko — Loch Ness</div>
+          <img src="assets/images/20190901_172819.jpg" alt="Skotsko" loading="lazy" />
+          <div class="gallery-caption">Skotsko</div>
         </div>
         <div class="gallery-item">
-          <div class="photo"></div>
-          <div class="gallery-caption">Anglie</div>
+          <img src="assets/images/2012-07-27%2022.46.29.jpg" alt="Paříž" loading="lazy" />
+          <div class="gallery-caption">Paříž</div>
         </div>
         <div class="gallery-item">
           <div class="photo"></div>
