@@ -4,7 +4,19 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Radek Dobiáš – Terapeut, Konzultant, Železniční technologie</title>
-  <meta name="description" content="Radek Dobiáš – terapeut, konzultant a odborník na železniční technologie." />
+  <meta name="description" content="Radek Dobiáš – terapeut, konzultant a odborník na železniční technologie. Pomáhám lidem i organizacím dosahovat jejich cílů." />
+
+  <!-- Open Graph -->
+  <meta property="og:title" content="Radek Dobiáš – Terapeut, Konzultant, Železniční technologie" />
+  <meta property="og:description" content="Terapeut, konzultant a odborník na železniční technologie. Pomáhám lidem i organizacím dosahovat jejich cílů." />
+  <meta property="og:url" content="https://radekdobias.cz" />
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="cs_CZ" />
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Radek Dobiáš – Terapeut, Konzultant, Železniční technologie" />
+  <meta name="twitter:description" content="Terapeut, konzultant a odborník na železniční technologie." />
+
+  <link rel="canonical" href="https://radekdobias.cz" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>" />
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -65,6 +77,31 @@
     }
 
     nav ul a:hover { color: var(--text); }
+    nav ul a.active { color: var(--accent); }
+
+    /* Hamburger */
+    .nav-toggle {
+      display: none;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 0.25rem;
+      flex-direction: column;
+      gap: 5px;
+    }
+
+    .nav-toggle span {
+      display: block;
+      width: 22px;
+      height: 2px;
+      background: var(--text);
+      transition: all 0.3s;
+      transform-origin: center;
+    }
+
+    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(2) { opacity: 0; }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
 
     /* HERO */
     .hero {
@@ -135,6 +172,7 @@
     .btn-primary {
       background: var(--accent);
       color: #fff;
+      border: none;
     }
 
     .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
@@ -146,6 +184,11 @@
     }
 
     .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
+
+    .btn-sm {
+      padding: 0.5rem 1.25rem;
+      font-size: 0.85rem;
+    }
 
     /* SECTIONS */
     section {
@@ -191,13 +234,35 @@
       display: grid;
       grid-template-columns: 1fr 1fr;
       gap: 3rem;
+      align-items: start;
+    }
+
+    .about-photo {
+      margin-bottom: 1.5rem;
+    }
+
+    .avatar {
+      width: 100px;
+      height: 100px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, var(--accent), var(--accent2));
+      display: flex;
       align-items: center;
+      justify-content: center;
+      font-size: 1.75rem;
+      font-weight: 800;
+      color: #fff;
+      letter-spacing: 0.02em;
     }
 
     .about-text p {
       color: var(--muted);
       margin-bottom: 1rem;
       font-size: 1.05rem;
+    }
+
+    .about-cta {
+      margin-top: 1rem;
     }
 
     .about-stats {
@@ -211,6 +276,10 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       padding: 1.5rem;
+    }
+
+    .stat:last-child:nth-child(odd) {
+      grid-column: span 2;
     }
 
     .stat-num {
@@ -242,6 +311,8 @@
       border-radius: var(--radius);
       padding: 2rem;
       transition: border-color 0.2s, transform 0.2s;
+      display: flex;
+      flex-direction: column;
     }
 
     .card:hover {
@@ -263,6 +334,11 @@
     .card p {
       color: var(--muted);
       font-size: 0.95rem;
+      flex: 1;
+    }
+
+    .card-cta {
+      margin-top: 1.25rem;
     }
 
     /* CONTACT */
@@ -293,10 +369,29 @@
 
     .contact-item span:first-child { font-size: 1.2rem; }
 
+    .contact-item a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    .contact-item a:hover { color: var(--text); }
+
     form {
       display: flex;
       flex-direction: column;
       gap: 1rem;
+    }
+
+    .form-group {
+      display: flex;
+      flex-direction: column;
+      gap: 0.4rem;
+    }
+
+    .form-group label {
+      font-size: 0.85rem;
+      color: var(--muted);
+      font-weight: 500;
     }
 
     input, textarea {
@@ -329,7 +424,29 @@
 
     /* RESPONSIVE */
     @media (max-width: 680px) {
-      nav ul { gap: 1.2rem; }
+      .nav-toggle { display: flex; }
+
+      nav ul {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        gap: 0;
+        background: rgba(15,17,23,0.97);
+        border-bottom: 1px solid var(--border);
+        padding: 0.5rem 0;
+      }
+
+      nav ul.open { display: flex; }
+
+      nav ul li a {
+        display: block;
+        padding: 0.75rem 2rem;
+        font-size: 1rem;
+      }
+
       .about-grid { grid-template-columns: 1fr; }
       .contact-inner { grid-template-columns: 1fr; }
       .about-stats { grid-template-columns: 1fr 1fr; }
@@ -341,7 +458,12 @@
   <!-- NAV -->
   <nav>
     <a href="#" class="logo">Radek Dobiáš</a>
-    <ul>
+    <button class="nav-toggle" aria-label="Přepnout navigaci" aria-expanded="false">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
+    <ul id="nav-menu">
       <li><a href="#about">O mně</a></li>
       <li><a href="#services">Služby</a></li>
       <li><a href="#contact">Kontakt</a></li>
@@ -351,7 +473,7 @@
   <!-- HERO -->
   <section class="hero">
     <div class="hero-inner">
-      <div class="hero-tag">radekdobias.cz</div>
+      <div class="hero-tag">Terapeut &amp; Konzultant</div>
       <h1>Radek <span>Dobiáš</span></h1>
       <p>Terapeut, konzultant a odborník na železniční technologie. Pomáhám lidem i organizacím dosahovat jejich cílů.</p>
       <div class="hero-actions">
@@ -366,11 +488,14 @@
     <div class="container">
       <div class="about-grid">
         <div class="about-text">
+          <div class="about-photo">
+            <div class="avatar">RD</div>
+          </div>
           <div class="section-label">O mně</div>
           <h2 class="section-title">Zkušenosti napříč obory</h2>
           <p>Jsem profesionál s bohatými zkušenostmi v oblasti terapie, poradenství a železničních technologií. Kombinuji odborné znalosti s empatickým přístupem.</p>
           <p>Mým cílem je přinášet skutečnou hodnotu – ať už jde o práci s lidmi v terapeutickém procesu, strategické poradenství firmám, nebo technické projekty v železničním průmyslu.</p>
-          <a href="#contact" class="btn btn-primary" style="margin-top:1rem;">Spojme se</a>
+          <a href="#contact" class="btn btn-primary about-cta">Spojme se</a>
         </div>
         <div class="about-stats">
           <div class="stat">
@@ -400,17 +525,26 @@
         <div class="card">
           <div class="card-icon">🧠</div>
           <h3>Terapie</h3>
-          <p>Individuální terapeutická práce zaměřená na osobní rozvoj, zvládání náročných životních situací a duševní pohodu. <a href="https://www.cestousebepoznani.cz" target="_blank" rel="noopener" style="color:var(--accent);">cestousebepoznani.cz</a></p>
+          <p>Individuální terapeutická práce zaměřená na osobní rozvoj, zvládání náročných životních situací a duševní pohodu.</p>
+          <div class="card-cta">
+            <a href="https://www.cestousebepoznani.cz" target="_blank" rel="noopener" class="btn btn-outline btn-sm">cestousebepoznani.cz →</a>
+          </div>
         </div>
         <div class="card">
           <div class="card-icon">💼</div>
           <h3>Konzultace</h3>
           <p>Strategické poradenství pro jednotlivce i firmy. Pomáhám nacházet efektivní řešení a nastavovat správné procesy.</p>
+          <div class="card-cta">
+            <a href="#contact" class="btn btn-outline btn-sm">Domluvit konzultaci →</a>
+          </div>
         </div>
         <div class="card">
           <div class="card-icon">🚆</div>
           <h3>Železniční technologie</h3>
           <p>Odborná expertíza v oblasti železničních technologií – technické konzultace, projekty a analýzy pro železniční sektor.</p>
+          <div class="card-cta">
+            <a href="#contact" class="btn btn-outline btn-sm">Nezávazná poptávka →</a>
+          </div>
         </div>
       </div>
     </div>
@@ -426,11 +560,15 @@
           <p>Máte zájem o spolupráci nebo chcete zjistit více informací? Neváhejte mě kontaktovat.</p>
           <div class="contact-item">
             <span>📧</span>
-            <a href="mailto:radek@radekdobias.cz" style="color:inherit;text-decoration:none;">radek@radekdobias.cz</a>
+            <a href="mailto:radek@radekdobias.cz">radek@radekdobias.cz</a>
           </div>
           <div class="contact-item">
             <span>🌐</span>
             <span>radekdobias.cz</span>
+          </div>
+          <div class="contact-item">
+            <span>📞</span>
+            <a href="tel:+420602318976">+420 602 318 976</a>
           </div>
           <div class="contact-item">
             <span>📍</span>
@@ -438,52 +576,21 @@
           </div>
         </div>
         <form id="contact-form">
-          <input type="text" id="form-name" placeholder="Vaše jméno" autocomplete="name" required />
-          <input type="email" id="form-email" placeholder="Váš e-mail" autocomplete="email" required />
-          <textarea id="form-message" placeholder="Vaše zpráva" required></textarea>
+          <div class="form-group">
+            <label for="form-name">Jméno</label>
+            <input type="text" id="form-name" placeholder="Vaše jméno" autocomplete="name" required />
+          </div>
+          <div class="form-group">
+            <label for="form-email">E-mail</label>
+            <input type="email" id="form-email" placeholder="Váš e-mail" autocomplete="email" required />
+          </div>
+          <div class="form-group">
+            <label for="form-message">Zpráva</label>
+            <textarea id="form-message" placeholder="Vaše zpráva" required></textarea>
+          </div>
           <button type="submit" id="form-submit" class="btn btn-primary">Odeslat zprávu</button>
           <div id="form-status" style="display:none;margin-top:0.75rem;padding:0.8rem 1rem;border-radius:8px;font-size:0.95rem;"></div>
         </form>
-        <script>
-          document.getElementById('contact-form').addEventListener('submit', function(e) {
-            e.preventDefault();
-            var btn = document.getElementById('form-submit');
-            var status = document.getElementById('form-status');
-            var data = new FormData();
-            data.append('name',    document.getElementById('form-name').value.trim());
-            data.append('email',   document.getElementById('form-email').value.trim());
-            data.append('message', document.getElementById('form-message').value.trim());
-
-            btn.disabled = true;
-            btn.textContent = 'Odesílám…';
-            status.style.display = 'none';
-
-            fetch('send.php', { method: 'POST', body: data })
-              .then(function(r) { return r.json(); })
-              .then(function(res) {
-                if (res.ok) {
-                  status.style.background = 'rgba(79,142,247,0.12)';
-                  status.style.border = '1px solid rgba(79,142,247,0.3)';
-                  status.style.color = '#4f8ef7';
-                  status.textContent = '✓ Zpráva byla odeslána. Ozvu se co nejdříve!';
-                  document.getElementById('contact-form').reset();
-                } else {
-                  throw new Error(res.error || 'Chyba');
-                }
-              })
-              .catch(function(err) {
-                status.style.background = 'rgba(220,53,69,0.12)';
-                status.style.border = '1px solid rgba(220,53,69,0.3)';
-                status.style.color = '#f07070';
-                status.textContent = '✗ Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.';
-              })
-              .finally(function() {
-                btn.disabled = false;
-                btn.textContent = 'Odeslat zprávu';
-                status.style.display = 'block';
-              });
-          });
-        </script>
       </div>
     </div>
   </section>
@@ -493,5 +600,80 @@
     <p>&copy; 2026 Radek Dobiáš &nbsp;·&nbsp; <a href="https://radekdobias.cz">radekdobias.cz</a></p>
   </footer>
 
+  <script>
+    // Hamburger menu
+    var toggle = document.querySelector('.nav-toggle');
+    var menu = document.getElementById('nav-menu');
+
+    toggle.addEventListener('click', function() {
+      var isOpen = menu.classList.toggle('open');
+      toggle.classList.toggle('open', isOpen);
+      toggle.setAttribute('aria-expanded', isOpen);
+    });
+
+    menu.querySelectorAll('a').forEach(function(a) {
+      a.addEventListener('click', function() {
+        menu.classList.remove('open');
+        toggle.classList.remove('open');
+        toggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    // Scroll spy
+    var sections = document.querySelectorAll('section[id]');
+    var navLinks = document.querySelectorAll('#nav-menu a');
+
+    var spy = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          navLinks.forEach(function(a) { a.classList.remove('active'); });
+          var active = document.querySelector('#nav-menu a[href="#' + entry.target.id + '"]');
+          if (active) active.classList.add('active');
+        }
+      });
+    }, { rootMargin: '-40% 0px -55% 0px' });
+
+    sections.forEach(function(s) { spy.observe(s); });
+
+    // Contact form
+    document.getElementById('contact-form').addEventListener('submit', function(e) {
+      e.preventDefault();
+      var btn = document.getElementById('form-submit');
+      var status = document.getElementById('form-status');
+      var data = new FormData();
+      data.append('name',    document.getElementById('form-name').value.trim());
+      data.append('email',   document.getElementById('form-email').value.trim());
+      data.append('message', document.getElementById('form-message').value.trim());
+
+      btn.disabled = true;
+      btn.textContent = 'Odesílám…';
+      status.style.display = 'none';
+
+      fetch('send.php', { method: 'POST', body: data })
+        .then(function(r) { return r.json(); })
+        .then(function(res) {
+          if (res.ok) {
+            status.style.background = 'rgba(79,142,247,0.12)';
+            status.style.border = '1px solid rgba(79,142,247,0.3)';
+            status.style.color = '#4f8ef7';
+            status.textContent = '✓ Zpráva byla odeslána. Ozvu se co nejdříve!';
+            document.getElementById('contact-form').reset();
+          } else {
+            throw new Error(res.error || 'Chyba');
+          }
+        })
+        .catch(function() {
+          status.style.background = 'rgba(220,53,69,0.12)';
+          status.style.border = '1px solid rgba(220,53,69,0.3)';
+          status.style.color = '#f07070';
+          status.textContent = '✗ Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.';
+        })
+        .finally(function() {
+          btn.disabled = false;
+          btn.textContent = 'Odeslat zprávu';
+          status.style.display = 'block';
+        });
+    });
+  </script>
 </body>
 </html>
