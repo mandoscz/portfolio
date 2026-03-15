@@ -27,19 +27,19 @@ if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
 $name    = str_replace(["\r", "\n"], '', $name);
 $email   = str_replace(["\r", "\n"], '', $email);
 
+mb_language('uni');
+mb_internal_encoding('UTF-8');
+
 $to      = 'radek@radekdobias.cz';
-$subject = '=?UTF-8?B?' . base64_encode('Dotaz z portfolia od ' . $name) . '?=';
-$body    = base64_encode("Jméno: {$name}\nE-mail: {$email}\n\n{$message}");
+$subject = 'Dotaz z portfolia od ' . $name;
+$body    = "Jméno: {$name}\nE-mail: {$email}\n\n{$message}";
 $headers = implode("\r\n", [
     'From: portfolio@radekdobias.cz',
     'Reply-To: ' . $email,
-    'MIME-Version: 1.0',
-    'Content-Type: text/plain; charset=UTF-8',
-    'Content-Transfer-Encoding: base64',
     'X-Mailer: PHP/' . phpversion(),
 ]);
 
-if (mail($to, $subject, $body, $headers)) {
+if (mb_send_mail($to, $subject, $body, $headers)) {
     echo json_encode(['ok' => true]);
 } else {
     http_response_code(500);
