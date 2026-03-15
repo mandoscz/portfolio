@@ -3,33 +3,29 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Radek Dobiáš – Terapeut, Konzultant, Železniční technologie</title>
-  <meta name="description" content="Radek Dobiáš – terapeut, konzultant a odborník na železniční technologie. Pomáhám lidem i organizacím dosahovat jejich cílů." />
-
-  <!-- Open Graph -->
-  <meta property="og:title" content="Radek Dobiáš – Terapeut, Konzultant, Železniční technologie" />
-  <meta property="og:description" content="Terapeut, konzultant a odborník na železniční technologie. Pomáhám lidem i organizacím dosahovat jejich cílů." />
+  <title>Radek Dobiáš</title>
+  <meta name="description" content="Radek Dobiáš — inženýr, terapeut, cestovatel. Rozumět světu. Rozumět sobě. Jednat správně." />
+  <meta property="og:title" content="Radek Dobiáš" />
+  <meta property="og:description" content="Rozumět světu. Rozumět sobě. Jednat správně." />
   <meta property="og:url" content="https://radekdobias.cz" />
   <meta property="og:type" content="website" />
   <meta property="og:locale" content="cs_CZ" />
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="Radek Dobiáš – Terapeut, Konzultant, Železniční technologie" />
-  <meta name="twitter:description" content="Terapeut, konzultant a odborník na železniční technologie." />
-
   <link rel="canonical" href="https://radekdobias.cz" />
   <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧭</text></svg>" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,600;0,700;1,400&family=DM+Sans:opsz,wght@9..40,300;9..40,400;9..40,500&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --bg: #0f1117;
-      --surface: #1a1d27;
-      --border: #2a2d3a;
-      --accent: #4f8ef7;
-      --accent2: #7c5cbf;
-      --text: #e8eaf0;
-      --muted: #8b90a0;
-      --radius: 12px;
+      --bg: #fafaf8;
+      --surface: #f2f0ec;
+      --border: #ddd9d2;
+      --accent: #1a3a5c;
+      --text: #1c1a17;
+      --muted: #7a746c;
     }
 
     html { scroll-behavior: smooth; }
@@ -37,11 +33,12 @@
     body {
       background: var(--bg);
       color: var(--text);
-      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
-      line-height: 1.65;
+      font-family: 'DM Sans', system-ui, -apple-system, sans-serif;
+      font-weight: 300;
+      line-height: 1.7;
     }
 
-    /* NAV */
+    /* --- NAV --- */
     nav {
       position: fixed;
       top: 0; left: 0; right: 0;
@@ -49,16 +46,19 @@
       display: flex;
       justify-content: space-between;
       align-items: center;
-      padding: 1rem 2rem;
-      background: rgba(15,17,23,0.85);
+      padding: 1.25rem 2.5rem;
+      background: rgba(250,250,248,0.92);
       backdrop-filter: blur(12px);
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid transparent;
+      transition: border-color 0.3s;
     }
 
+    nav.scrolled { border-bottom-color: var(--border); }
+
     nav .logo {
+      font-family: 'Playfair Display', Georgia, serif;
       font-size: 1.1rem;
-      font-weight: 700;
-      letter-spacing: 0.02em;
+      font-weight: 600;
       color: var(--text);
       text-decoration: none;
     }
@@ -66,20 +66,22 @@
     nav ul {
       list-style: none;
       display: flex;
-      gap: 2rem;
+      gap: 2.5rem;
     }
 
     nav ul a {
       color: var(--muted);
       text-decoration: none;
-      font-size: 0.9rem;
+      font-size: 0.78rem;
+      font-weight: 400;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
       transition: color 0.2s;
     }
 
     nav ul a:hover { color: var(--text); }
     nav ul a.active { color: var(--accent); }
 
-    /* Hamburger */
     .nav-toggle {
       display: none;
       background: none;
@@ -93,330 +95,522 @@
     .nav-toggle span {
       display: block;
       width: 22px;
-      height: 2px;
+      height: 1.5px;
       background: var(--text);
       transition: all 0.3s;
       transform-origin: center;
     }
 
-    .nav-toggle.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+    .nav-toggle.open span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
     .nav-toggle.open span:nth-child(2) { opacity: 0; }
-    .nav-toggle.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+    .nav-toggle.open span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
 
-    /* HERO */
-    .hero {
-      min-height: 100vh;
+    /* --- REVEAL ANIMACE --- */
+    .reveal {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s ease, transform 0.7s ease;
+    }
+
+    .reveal.visible { opacity: 1; transform: none; }
+    .reveal-d1 { transition-delay: 0.1s; }
+    .reveal-d2 { transition-delay: 0.2s; }
+    .reveal-d3 { transition-delay: 0.3s; }
+    .reveal-d4 { transition-delay: 0.4s; }
+
+    /* --- FOTO PLACEHOLDER --- */
+    .photo {
+      background: var(--surface);
+      border: 1px solid var(--border);
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-      padding: 6rem 1.5rem 4rem;
-      background: radial-gradient(ellipse at 50% 0%, rgba(79,142,247,0.12) 0%, transparent 70%);
     }
 
-    .hero-inner { max-width: 700px; }
-
-    .hero-tag {
-      display: inline-block;
-      background: rgba(79,142,247,0.12);
-      color: var(--accent);
-      border: 1px solid rgba(79,142,247,0.3);
-      border-radius: 999px;
-      padding: 0.3rem 1rem;
-      font-size: 0.8rem;
-      letter-spacing: 0.08em;
+    .photo::after {
+      content: 'foto';
+      font-size: 0.68rem;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      margin-bottom: 1.5rem;
+      color: var(--border);
+    }
+
+    /* --- HERO --- */
+    .hero {
+      min-height: 100vh;
+      display: grid;
+      grid-template-columns: 5fr 7fr;
+    }
+
+    .hero-text {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 8rem 4rem 4rem 2.5rem;
+    }
+
+    /* Stagger animace pri nacteni */
+    .hero-text > * {
+      opacity: 0;
+      transform: translateY(18px);
+    }
+
+    .hero-text.loaded .hero-label { animation: fadeUp 0.6s 0.1s forwards ease; }
+    .hero-text.loaded h1          { animation: fadeUp 0.6s 0.28s forwards ease; }
+    .hero-text.loaded .hero-sub   { animation: fadeUp 0.6s 0.48s forwards ease; }
+    .hero-text.loaded .hero-hint  { animation: fadeUp 0.6s 0.68s forwards ease; }
+
+    @keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+    .hero-label {
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--muted);
+      margin-bottom: 1.75rem;
     }
 
     .hero h1 {
-      font-size: clamp(2.5rem, 6vw, 4.5rem);
-      font-weight: 800;
-      line-height: 1.1;
-      margin-bottom: 1.25rem;
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(3.2rem, 5.5vw, 5.5rem);
+      font-weight: 700;
+      line-height: 1.05;
       letter-spacing: -0.02em;
+      margin-bottom: 2rem;
+      color: var(--text);
     }
 
-    .hero h1 span {
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-    }
-
-    .hero p {
+    .hero-sub {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(1rem, 1.4vw, 1.2rem);
       color: var(--muted);
-      font-size: 1.15rem;
-      max-width: 520px;
-      margin: 0 auto 2.5rem;
+      line-height: 1.65;
+      border-left: 2px solid var(--border);
+      padding-left: 1.25rem;
+      max-width: 360px;
+      margin-bottom: 0;
     }
 
-    .hero-actions {
+    .hero-hint {
+      margin-top: auto;
+      padding-top: 3rem;
+      font-size: 0.72rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--border);
       display: flex;
-      gap: 1rem;
-      justify-content: center;
-      flex-wrap: wrap;
+      align-items: center;
+      gap: 0.75rem;
     }
 
-    .btn {
-      display: inline-block;
-      padding: 0.75rem 1.75rem;
-      border-radius: var(--radius);
-      font-size: 0.95rem;
-      font-weight: 600;
-      text-decoration: none;
-      transition: all 0.2s;
-      cursor: pointer;
+    .hero-hint::before {
+      content: '';
+      display: block;
+      width: 40px;
+      height: 1px;
+      background: var(--border);
     }
 
-    .btn-primary {
-      background: var(--accent);
-      color: #fff;
+    .hero-photo {
+      position: relative;
+    }
+
+    .hero-photo .photo {
+      position: absolute;
+      inset: 0;
       border: none;
     }
 
-    .btn-primary:hover { opacity: 0.88; transform: translateY(-1px); }
-
-    .btn-outline {
-      border: 1px solid var(--border);
-      color: var(--text);
-      background: transparent;
+    /* --- CITÁT ODDELOVAC --- */
+    .quote-divider {
+      padding: 4rem 2.5rem;
+      text-align: center;
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+      background: var(--surface);
     }
 
-    .btn-outline:hover { border-color: var(--accent); color: var(--accent); }
-
-    .btn-sm {
-      padding: 0.5rem 1.25rem;
-      font-size: 0.85rem;
+    .quote-divider blockquote {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: clamp(0.95rem, 1.8vw, 1.25rem);
+      color: var(--muted);
+      max-width: 700px;
+      margin: 0 auto;
+      line-height: 1.75;
     }
 
-    /* SECTIONS */
-    section {
-      padding: 5rem 1.5rem;
-    }
+    /* --- SEKCE OBECNE --- */
+    section { padding: 6rem 2.5rem; }
 
     .container {
-      max-width: 960px;
+      max-width: 1040px;
       margin: 0 auto;
     }
 
     .section-label {
-      font-size: 0.75rem;
-      font-weight: 700;
-      letter-spacing: 0.12em;
+      font-size: 0.7rem;
+      font-weight: 500;
+      letter-spacing: 0.15em;
       text-transform: uppercase;
-      color: var(--accent);
-      margin-bottom: 0.75rem;
-    }
-
-    .section-title {
-      font-size: clamp(1.75rem, 4vw, 2.5rem);
-      font-weight: 800;
-      letter-spacing: -0.02em;
+      color: var(--muted);
       margin-bottom: 1rem;
     }
 
-    .section-desc {
-      color: var(--muted);
-      max-width: 560px;
-      margin-bottom: 3rem;
-      font-size: 1.05rem;
+    .section-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: clamp(2rem, 3.8vw, 3rem);
+      font-weight: 700;
+      letter-spacing: -0.02em;
+      line-height: 1.15;
+      margin-bottom: 2.5rem;
+      color: var(--text);
     }
 
-    /* ABOUT */
-    #about {
+    /* --- O MNE --- */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 380px;
+      gap: 5rem;
+      align-items: start;
+    }
+
+    .about-text p {
+      color: var(--muted);
+      margin-bottom: 1.3rem;
+      font-size: 1.02rem;
+      line-height: 1.82;
+    }
+
+    .about-text p:last-child { margin-bottom: 0; }
+
+    .about-photo {
+      aspect-ratio: 4/5;
+      position: sticky;
+      top: 5rem;
+    }
+
+    /* --- CO DELAM --- */
+    #work {
       background: var(--surface);
       border-top: 1px solid var(--border);
       border-bottom: 1px solid var(--border);
     }
 
-    .about-grid {
+    .work-cards {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
-      align-items: start;
-    }
-
-.about-text p {
-      color: var(--muted);
-      margin-bottom: 1rem;
-      font-size: 1.05rem;
-    }
-
-    .about-cta {
-      margin-top: 1rem;
-    }
-
-    .about-stats {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 1.5rem;
-    }
-
-    .stat {
-      background: var(--bg);
+      gap: 1px;
+      background: var(--border);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 1.5rem;
     }
 
-    .stat:last-child:nth-child(odd) {
-      grid-column: span 2;
-    }
-
-    .stat-num {
-      font-size: 2.25rem;
-      font-weight: 800;
-      background: linear-gradient(135deg, var(--accent), var(--accent2));
-      -webkit-background-clip: text;
-      -webkit-text-fill-color: transparent;
-      background-clip: text;
-      line-height: 1;
-      margin-bottom: 0.4rem;
-    }
-
-    .stat-label {
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-
-    /* SERVICES */
-    .cards {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(270px, 1fr));
-      gap: 1.5rem;
-    }
-
-    .card {
+    .work-card {
       background: var(--surface);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 2rem;
-      transition: border-color 0.2s, transform 0.2s;
-      display: flex;
-      flex-direction: column;
+      padding: 2.5rem;
+      transition: background 0.2s;
     }
 
-    .card:hover {
-      border-color: var(--accent);
-      transform: translateY(-3px);
-    }
+    .work-card:hover { background: var(--bg); }
 
-    .card-icon {
-      font-size: 2rem;
-      margin-bottom: 1rem;
-    }
-
-    .card h3 {
-      font-size: 1.15rem;
+    .work-card-num {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 2.5rem;
       font-weight: 700;
-      margin-bottom: 0.6rem;
+      color: var(--border);
+      line-height: 1;
+      margin-bottom: 1.25rem;
     }
 
-    .card p {
+    .work-card h3 {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.25rem;
+      font-weight: 600;
+      margin-bottom: 0.75rem;
+      color: var(--text);
+    }
+
+    .work-card p {
       color: var(--muted);
       font-size: 0.95rem;
-      flex: 1;
+      line-height: 1.72;
     }
 
-    .card-cta {
+    .work-card-link {
+      display: inline-block;
       margin-top: 1.25rem;
+      font-size: 0.78rem;
+      letter-spacing: 0.09em;
+      text-transform: uppercase;
+      color: var(--accent);
+      text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 1px;
+      transition: border-color 0.2s;
     }
 
-    /* CONTACT */
-    #contact {
+    .work-card-link:hover { border-color: var(--accent); }
+
+    /* --- CESTOVANI --- */
+    #travel { background: var(--bg); }
+
+    .gallery {
+      columns: 3;
+      column-gap: 1rem;
+    }
+
+    .gallery-item {
+      break-inside: avoid;
+      margin-bottom: 1rem;
+    }
+
+    /* striedajici pomery stran pro masonry efekt */
+    .gallery-item:nth-child(3n+1) .photo { aspect-ratio: 3/4; }
+    .gallery-item:nth-child(3n+2) .photo { aspect-ratio: 4/3; }
+    .gallery-item:nth-child(3n)   .photo { aspect-ratio: 1/1; }
+
+    .gallery-item .photo { width: 100%; border: none; }
+
+    .gallery-caption {
+      padding: 0.55rem 0 0;
+      font-size: 0.72rem;
+      letter-spacing: 0.1em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    /* --- MUJ PRIBEH --- */
+    #story {
       background: var(--surface);
       border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
     }
+
+    .story-intro {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      font-size: 1.12rem;
+      color: var(--muted);
+      margin-bottom: 3rem;
+      max-width: 580px;
+    }
+
+    .accordion-item {
+      border-top: 1px solid var(--border);
+    }
+
+    .accordion-item:last-child { border-bottom: 1px solid var(--border); }
+
+    .accordion-toggle {
+      width: 100%;
+      background: none;
+      border: none;
+      cursor: pointer;
+      padding: 1.5rem 0;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 1rem;
+      text-align: left;
+    }
+
+    .accordion-toggle-title {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: var(--text);
+    }
+
+    .accordion-icon {
+      flex-shrink: 0;
+      width: 26px;
+      height: 26px;
+      border: 1px solid var(--border);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 0.85rem;
+      color: var(--muted);
+      transition: transform 0.3s, border-color 0.2s, color 0.2s;
+    }
+
+    .accordion-item.open .accordion-icon {
+      transform: rotate(45deg);
+      border-color: var(--accent);
+      color: var(--accent);
+    }
+
+    .accordion-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height 0.5s ease;
+    }
+
+    .accordion-body-inner {
+      padding-bottom: 2rem;
+    }
+
+    .accordion-body-inner p {
+      color: var(--muted);
+      font-size: 0.97rem;
+      line-height: 1.82;
+      margin-bottom: 1rem;
+    }
+
+    .accordion-body-inner p:last-child { margin-bottom: 0; }
+
+    .epilog {
+      font-family: 'Playfair Display', Georgia, serif;
+      font-style: italic;
+      border-left: 2px solid var(--border);
+      padding-left: 1.5rem;
+      color: var(--muted);
+      line-height: 2.1;
+      font-size: 0.95rem;
+    }
+
+    /* --- KONTAKT --- */
+    #contact { background: var(--bg); }
 
     .contact-inner {
       display: grid;
       grid-template-columns: 1fr 1fr;
-      gap: 3rem;
+      gap: 5rem;
+      align-items: start;
     }
 
-    .contact-info p {
+    .contact-info > p {
       color: var(--muted);
-      margin-bottom: 1.5rem;
+      margin-bottom: 2.5rem;
+      font-size: 1rem;
+      line-height: 1.8;
     }
 
     .contact-item {
       display: flex;
-      align-items: center;
+      align-items: baseline;
       gap: 0.75rem;
-      color: var(--muted);
       margin-bottom: 1rem;
       font-size: 0.95rem;
     }
 
-    .contact-item span:first-child { font-size: 1.2rem; }
+    .contact-label {
+      font-size: 0.65rem;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--border);
+      width: 60px;
+      flex-shrink: 0;
+    }
 
     .contact-item a {
-      color: inherit;
+      color: var(--text);
       text-decoration: none;
+      border-bottom: 1px solid var(--border);
+      transition: border-color 0.2s;
     }
 
-    .contact-item a:hover { color: var(--text); }
+    .contact-item a:hover { border-color: var(--text); }
+    .contact-item span { color: var(--muted); }
 
-    form {
-      display: flex;
-      flex-direction: column;
-      gap: 1rem;
-    }
+    /* Form */
+    form { display: flex; flex-direction: column; gap: 1.4rem; }
 
-    .form-group {
-      display: flex;
-      flex-direction: column;
-      gap: 0.4rem;
-    }
+    .form-group { display: flex; flex-direction: column; gap: 0.4rem; }
 
     .form-group label {
-      font-size: 0.85rem;
+      font-size: 0.68rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
       color: var(--muted);
-      font-weight: 500;
     }
 
     input, textarea {
-      background: var(--bg);
-      border: 1px solid var(--border);
-      border-radius: 8px;
-      padding: 0.8rem 1rem;
+      background: transparent;
+      border: none;
+      border-bottom: 1px solid var(--border);
+      padding: 0.6rem 0;
       color: var(--text);
-      font-size: 0.95rem;
+      font-size: 0.97rem;
       font-family: inherit;
+      font-weight: 300;
       outline: none;
       transition: border-color 0.2s;
       width: 100%;
+      border-radius: 0;
     }
 
-    input:focus, textarea:focus { border-color: var(--accent); }
-    textarea { resize: vertical; min-height: 140px; }
+    input:focus, textarea:focus { border-bottom-color: var(--text); }
+    textarea { resize: none; min-height: 120px; }
 
-    /* FOOTER */
+    .btn-send {
+      align-self: flex-start;
+      margin-top: 0.25rem;
+      background: none;
+      border: 1px solid var(--text);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 0.75rem;
+      font-weight: 400;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      padding: 0.85rem 2rem;
+      cursor: pointer;
+      transition: background 0.2s, color 0.2s;
+    }
+
+    .btn-send:hover { background: var(--text); color: var(--bg); }
+    .btn-send:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    /* --- FOOTER --- */
     footer {
-      padding: 2rem 1.5rem;
-      text-align: center;
-      color: var(--muted);
-      font-size: 0.85rem;
+      padding: 2rem 2.5rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
       border-top: 1px solid var(--border);
+      color: var(--muted);
+      font-size: 0.78rem;
+      letter-spacing: 0.04em;
     }
 
-    footer a { color: var(--muted); text-decoration: none; }
+    footer a { color: inherit; text-decoration: none; }
     footer a:hover { color: var(--text); }
 
-    /* RESPONSIVE */
-    @media (max-width: 680px) {
+    /* --- RESPONSIVE --- */
+    @media (max-width: 960px) {
+      .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+      .about-photo { position: static; max-width: 360px; }
+      .work-cards { grid-template-columns: 1fr; }
+      .gallery { columns: 2; }
+      .contact-inner { grid-template-columns: 1fr; gap: 3rem; }
+    }
+
+    @media (max-width: 760px) {
+      .hero { grid-template-columns: 1fr; }
+      .hero-text { padding: 7rem 1.5rem 2rem; }
+      .hero-photo { height: 65vw; min-height: 260px; }
+      .hero-hint { display: none; }
+    }
+
+    @media (max-width: 640px) {
+      section { padding: 4rem 1.5rem; }
+      nav { padding: 1rem 1.5rem; }
       .nav-toggle { display: flex; }
+      .gallery { columns: 1; }
+      .quote-divider { padding: 3rem 1.5rem; }
+      footer { flex-direction: column; gap: 0.5rem; text-align: center; }
 
       nav ul {
         display: none;
         position: absolute;
         top: 100%;
-        left: 0;
-        right: 0;
+        left: 0; right: 0;
         flex-direction: column;
         gap: 0;
-        background: rgba(15,17,23,0.97);
+        background: rgba(250,250,248,0.98);
         border-bottom: 1px solid var(--border);
         padding: 0.5rem 0;
       }
@@ -425,136 +619,306 @@
 
       nav ul li a {
         display: block;
-        padding: 0.75rem 2rem;
-        font-size: 1rem;
+        padding: 0.85rem 1.5rem;
+        font-size: 0.85rem;
       }
-
-      .about-grid { grid-template-columns: 1fr; }
-      .contact-inner { grid-template-columns: 1fr; }
-      .about-stats { grid-template-columns: 1fr 1fr; }
     }
   </style>
 </head>
 <body>
 
   <!-- NAV -->
-  <nav>
+  <nav id="main-nav">
     <a href="#" class="logo">Radek Dobiáš</a>
     <button class="nav-toggle" aria-label="Přepnout navigaci" aria-expanded="false">
-      <span></span>
-      <span></span>
-      <span></span>
+      <span></span><span></span><span></span>
     </button>
     <ul id="nav-menu">
       <li><a href="#about">O mně</a></li>
-      <li><a href="#services">Služby</a></li>
+      <li><a href="#work">Co dělám</a></li>
+      <li><a href="#travel">Cestování</a></li>
+      <li><a href="#story">Příběh</a></li>
       <li><a href="#contact">Kontakt</a></li>
     </ul>
   </nav>
 
   <!-- HERO -->
-  <section class="hero">
-    <div class="hero-inner">
-      <div class="hero-tag">Terapeut &amp; Konzultant</div>
-      <h1>Radek <span>Dobiáš</span></h1>
-      <p>Terapeut, konzultant a odborník na železniční technologie. Pomáhám lidem i organizacím dosahovat jejich cílů.</p>
-      <div class="hero-actions">
-        <a href="#services" class="btn btn-primary">Moje služby</a>
-        <a href="#contact" class="btn btn-outline">Kontaktovat</a>
-      </div>
+  <div class="hero">
+    <div class="hero-text" id="hero-text">
+      <div class="hero-label">Praha · radekdobias.cz</div>
+      <h1>Radek<br>Dobiáš</h1>
+      <p class="hero-sub">„Rozumět světu.<br>Rozumět sobě.<br>Jednat správně."</p>
+      <div class="hero-hint">Scroll</div>
     </div>
-  </section>
+    <div class="hero-photo">
+      <div class="photo"></div>
+    </div>
+  </div>
 
-  <!-- ABOUT -->
+  <!-- CITÁT -->
+  <div class="quote-divider reveal">
+    <blockquote>
+      „Those who make things happen. Those who watch things happen.<br>
+      And those who say: What happened?"
+    </blockquote>
+  </div>
+
+  <!-- O MNE -->
   <section id="about">
     <div class="container">
       <div class="about-grid">
         <div class="about-text">
-          <div class="section-label">O mně</div>
-          <h2 class="section-title">Zkušenosti napříč obory</h2>
-          <p>Jsem profesionál s bohatými zkušenostmi v oblasti terapie, poradenství a železničních technologií. Kombinuji odborné znalosti s empatickým přístupem.</p>
-          <p>Mým cílem je přinášet skutečnou hodnotu – ať už jde o práci s lidmi v terapeutickém procesu, strategické poradenství firmám, nebo technické projekty v železničním průmyslu.</p>
-          <a href="#contact" class="btn btn-primary about-cta">Spojme se</a>
+          <div class="section-label reveal">O mně</div>
+          <h2 class="section-title reveal">Inženýr, který se<br>nezastavil u techniky.</h2>
+          <div class="reveal reveal-d1">
+            <p>Jsem inženýr, který se nezastavil u techniky. A člověk, který se nezastavil u sebe.</p>
+            <p>Přes dvacet let se pohybuji na pomezí dvou světů — světa přesných systémů, kde bezpečnost není kompromis, a světa lidské duše, kde platí jiná pravidla, ale stejná pečlivost.</p>
+            <p>Zavádím do praxe moderní bezpečnostní systémy na železnici — systémy, které zajišťují, aby se vlaky nesrážely. Fascinuje mě, jak složité věci mohou fungovat spolehlivě — a jak křehké jsou, když něco přehlédneme. To stejné se dá říct i o lidech.</p>
+            <p>Projel jsem Nový Zéland dvakrát na motorkách Simson s kamarádem — a při druhé cestě jsme týden strávili v Číně, včetně Velké čínské zdi. Projel jsem poušť v Maroku, viděl Grand Canyon i Hoover Dam, stál u Lochnesského jezera ve Skotsku. Rok jsem studoval v Německu. Stál jsem u Černobylské elektrárny.</p>
+            <p>Tituly PhD a MBA přišly, ale naplnění ne. Někdy kolem třicítky jsem pochopil, že odpovědi, které hledám, nejsou v dalším diplomu. Tak začala cesta dovnitř — Jungova individuace, buddhická meditace, a postupné odkrývání toho, co jsem celou dobu přehlížel.</p>
+            <p>Věřím, že poznání je způsob života. Že improvizace není chaos, ale přítomnost. Že říct „to nevadí" někdy vyžaduje víc odvahy než bojovat.</p>
+            <p>Mám partnerku a dceru. Žijeme v Praze.</p>
+            <p>Jsem typ člověka, který chce být u toho, když se věci mění k lepšímu.</p>
+          </div>
         </div>
-        <div class="about-stats">
-          <div class="stat">
-            <div class="stat-num">10+</div>
-            <div class="stat-label">let zkušeností</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">3</div>
-            <div class="stat-label">oblasti odbornosti</div>
-          </div>
-          <div class="stat">
-            <div class="stat-num">ČR</div>
-            <div class="stat-label">působiště</div>
-          </div>
+        <div class="reveal reveal-d2">
+          <div class="photo about-photo"></div>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- SERVICES -->
-  <section id="services">
+  <!-- CO DELAM -->
+  <section id="work">
     <div class="container">
-      <div class="section-label">Služby</div>
-      <h2 class="section-title">Čím mohu pomoci</h2>
-      <p class="section-desc">Nabízím profesionální služby ve třech klíčových oblastech – vždy s osobním přístupem a zaměřením na výsledek.</p>
-      <div class="cards">
-        <div class="card">
-          <div class="card-icon">🧠</div>
-          <h3>Terapie</h3>
-          <p>Individuální terapeutická práce zaměřená na osobní rozvoj, zvládání náročných životních situací a duševní pohodu.</p>
-          <div class="card-cta">
-            <a href="https://www.cestousebepoznani.cz" target="_blank" rel="noopener" class="btn btn-outline btn-sm">cestousebepoznani.cz →</a>
-          </div>
+      <div class="section-label reveal">Co dělám</div>
+      <h2 class="section-title reveal">Čtyři oblasti,<br>jeden přístup.</h2>
+      <div class="work-cards reveal reveal-d1">
+        <div class="work-card">
+          <div class="work-card-num">01</div>
+          <h3>Železnice &amp; bezpečnost</h3>
+          <p>Zavádění moderních bezpečnostních systémů na železnici — především ETCS. Pracuji na tom, aby se vlaky nesrážely a komplexní systémy fungovaly spolehlivě.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">💼</div>
-          <h3>Konzultace</h3>
-          <p>Strategické poradenství pro jednotlivce i firmy. Pomáhám nacházet efektivní řešení a nastavovat správné procesy.</p>
-          <div class="card-cta">
-            <a href="#contact" class="btn btn-outline btn-sm">Domluvit konzultaci →</a>
-          </div>
+        <div class="work-card">
+          <div class="work-card-num">02</div>
+          <h3>Technické konzultace</h3>
+          <p>Bezpečnostní analýzy, analýzy rizik a spolehlivosti — i mimo železniční sektor. Zkušenosti s certifikací a audity bezpečnostních systémů.</p>
         </div>
-        <div class="card">
-          <div class="card-icon">🚆</div>
-          <h3>Železniční technologie</h3>
-          <p>Odborná expertíza v oblasti železničních technologií – technické konzultace, projekty a analýzy pro železniční sektor.</p>
-          <div class="card-cta">
-            <a href="#contact" class="btn btn-outline btn-sm">Nezávazná poptávka →</a>
-          </div>
+        <div class="work-card">
+          <div class="work-card-num">03</div>
+          <h3>Sebepoznání &amp; terapie</h3>
+          <p>Individuální práce s lidmi na cestě dovnitř. Jungova psychologie, meditace, sebepoznání jako způsob života — ne jako rychlý fix.</p>
+          <a href="https://www.cestousebepoznani.cz" target="_blank" rel="noopener" class="work-card-link">cestousebepoznani.cz →</a>
+        </div>
+        <div class="work-card">
+          <div class="work-card-num">04</div>
+          <h3>SVJ &amp; bytová družstva</h3>
+          <p>Předseda výboru se zkušeností se správou, financováním a fungováním společenství vlastníků. Praktický pohled zevnitř.</p>
         </div>
       </div>
     </div>
   </section>
 
-  <!-- CONTACT -->
+  <!-- CESTOVANI -->
+  <section id="travel">
+    <div class="container">
+      <div class="section-label reveal">Cestování</div>
+      <h2 class="section-title reveal">Svět jako způsob<br>poznání.</h2>
+      <div class="gallery reveal reveal-d1">
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">Nový Zéland</div>
+        </div>
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">Maroko</div>
+        </div>
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">USA — Grand Canyon</div>
+        </div>
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">Velká Čínská zeď</div>
+        </div>
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">Černobylská elektrárna</div>
+        </div>
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">Skotsko — Loch Ness</div>
+        </div>
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">Anglie</div>
+        </div>
+        <div class="gallery-item">
+          <div class="photo"></div>
+          <div class="gallery-caption">Německo</div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- MUJ PRIBEH -->
+  <section id="story">
+    <div class="container">
+      <div class="section-label reveal">Můj příběh</div>
+      <h2 class="section-title reveal">O drakovi,<br>který nelétal.</h2>
+      <p class="story-intro reveal">„Toto je příběh o tom, jak jsem se učil létat."</p>
+
+      <div class="reveal reveal-d1">
+
+        <div class="accordion-item">
+          <button class="accordion-toggle" aria-expanded="false">
+            <span class="accordion-toggle-title">Obraz první: Zrození draka</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>V dávných dobách žila byla na světě jedna mladá čarodějnice. V životě ji provázel její věrný souputník pštros. Každý den musela létat za svou matkou, starou čarodějnicí, aby jí pomohla. Stará čarodějnice ve svém doupěti totiž prováděla černou magii a potřebovala, aby ji někdo každý den uklidil zbytky netopýrů a jiné havěti, co na lektvary používala.</p>
+              <p>Mladá čarodějnice bydlela i se svým pštrosem v dalekém lese, v chaloupce na pštrosí noze. Byla už ve věku, kdy se čarodějnice začínají nudit, a tak si ke svému pštrosovi chtěla pořídit i malého dráčka. Chtěla z něj vypěstovat velikého a silného draka, který ji bude poslouchat a chránit ji, až bude starší.</p>
+              <p>Čarodějnice pak každý den prováděla svá kouzla, vařila dračí lektvar, ale draka se jí vykouzlit nedařilo. Čím víc to zkoušela, tím byly výsledky žalostnější — žáby, pulcové a jiná havěť. Vůbec žádný drak. Až jí její matka, stará čarodějnice, poradila, že do dračího lektvaru je potřeba přidat péro z ptáka, jinak se jí létajícího draka vykouzlit nepovede.</p>
+              <p>Čarodějnice neváhala ani chviličku a vytrhla péro ze svého pštrosa. Přidala ho do dračího lektvaru. A opravdu, za chvíli se jí podařilo vykouzlit malého dráčka Happíka.</p>
+              <p>Všichni tři žili spolu v chaloupce na pštrosí noze. Pštros měl dráčka Happíka rád. Často si s ním hrál a také mu připravoval krmení, jak mu čarodějnice přikázala. Čarodějnice se tu a tam proměnila v pštrosici, a to se pštrosovi moc líbilo.</p>
+              <p>Čarodějnice pojala nápad, jak pštrosa zlomit. Začala mu vyhrožovat, že společně s dráčkem poletí k sopce a vlétne do rozžhavené lávy. A pak už bude pštros na světě jednou provždy sám.</p>
+              <p>„Pštrose, pštrosíčku, prosím, přestaň s tím zkvašeným ovocem," prosil dráček pštrosa, „nechci skončit v rozžhavené lávě."</p>
+              <p>Pštros byl od té doby poslušný. Dráčka však představa rozžhavené lávy tak pohltila, že přestal úplně chrlit oheň. Bál se, že by mohl něco rozžhavit tak, že se to změní v lávu a on v lávě zahyne. A tak dráček už nikdy oheň nechrlil.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-toggle" aria-expanded="false">
+            <span class="accordion-toggle-title">Obraz druhý: Dospívání</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Když dráček Happík dorostl v draka, začal mít chuť zblajznout nějakou princeznu. Ale kde sehnat princeznu? Drak byl velký. Na první pohled sice budil respekt, jenže neuměl létat a nechrlil oheň. A tak se mu lidé spíš posmívali.</p>
+              <p>Když už si nějaké království s princeznou vyhlédl, než tam došel, všichni utekli. Mohl sice zbořit a zničit palác, princeznu ale nedostal.</p>
+              <p>Čarodějnice taky nechtěla draka nikam pouštět. Chtěla draka pro sebe a svou ochranu a ne, aby se někde trmácel za princeznami.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-toggle" aria-expanded="false">
+            <span class="accordion-toggle-title">Obraz třetí: Je to vůbec drak?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Čím byl drak starší, tím víc se jeho hlavy hádaly. Jedna chtěla princezny k obědu, druhá hlava chtěla radši prince, třetí hlava byla poslušná a chtěla zůstat u čarodějnice. Vojevůdcovská hlava chtěla bořit hrady. Šest hlav se neustále hádalo a ta sedmá byla vždy s tím, kdo zrovna vyhrával.</p>
+              <p>Nakonec se drak s vypětím všech sil odstěhoval od čarodějnice a pštrosa. Našel si jeden opuštěný hrad na vysokém kopci. Tam se cítil aspoň trochu dobře, protože viděl široko daleko a nic mu neuniklo.</p>
+              <p>Jednoho dne přišel na drakův hrad mudrc z daleka a vůbec se draka nebál. Drak si řekl, že sežrat ho může i později a dal se s ním do řeči. Mudrc drakovi slíbil, že ho může dovést na místo, kde se draci učí létat. „Je to však opravdu daleko," řekl mudrc drakovi, „a bez ohně v tvém hrdle se tam nikdy nedostaneme." A tak drak věděl, že musí nejprve zapálit svůj oheň.</p>
+              <p>Požádal tedy mudrce, aby ho k sopce dovedl. Mudrc pomohl drakovi do blízkosti sopky s tím, že dál už musí jít sám. Nesmí se ohlédnout a zaváhat, jinak zemře. Jak se blížil, tlapy ho pálily od žhavé lávy pod tenkou vrstvou hlíny. Pak našel místo, kde žhavá láva vytékala na povrch. Drak natáhl své krky, naklonil své hlavy nad rozžhavenou lávu — a oheň v jeho nitru se zažehl. Drak samou radostí zapálil několik lesů a polí. Konečně se drak Happík začal cítit trochu jako opravdový drak.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-toggle" aria-expanded="false">
+            <span class="accordion-toggle-title">Obraz čtvrtý: Narození sovičky</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Nové sebevědomí pomohlo draku Happíkovi najít si kamarádku dračici Susi. Bylo to jiné než se honit za princeznami. Dračice drakovi radila, jak a co má a nemá dělat. Drakovi se trochu ulevilo.</p>
+              <p>Když už se drak s dračicí sžili, rozhodli se mít spolu potomka. Po několika měsících se jim však nenarodil malý drak, ale sovička. Dali jí jméno Iness. Ani jeden však nevěděl, jak se taková sova vychovává.</p>
+              <p>Drak byl zoufalý. Viděl, že neumí být sovičce Iness dobrým otcem. Moc ho to bolelo. Rada mudrcova byla jednoduchá: „Zůstaň se svou bolestí." I tak jednoduchou radu bylo však moc těžké dodržet.</p>
+              <p>Drak poznal, že je v bezvýchodné situaci. Tak jako tak bude trpět jednou provždy. Nedá se dělat nic. Vůbec nic. A to Happíka maličko uklidnilo.</p>
+              <p>Po mnoha zápasech a východech slunce se mudrc u draka opět objevil. Vyprávěl mu o své prožité beznaději. To draka uklidnilo. Najednou svou situaci přestal vnímat beznadějně, ale jen jako fakt. Bolest se téměř vytratila. Mudrc drakovi řekl, že to byla poslední překážka, která drakovi bránila vydat se na cestu na místo, kde se draci učí létat.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-toggle" aria-expanded="false">
+            <span class="accordion-toggle-title">Obraz pátý: Bude drak létat?</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p>Mudrc vedl draka hlubokými lesy, přes louky a tůně, i skrz hluboké jeskyně musel drak projít. Hlavy se učili spolu vyjít a domlouvat se. Ani když vesničané draka chytili a chtěli ho upálit, nenechal jim mudrc draka napospas. Pomohl drakovi utéct.</p>
+              <p>Přestože drak už uměl chrlit oheň, jeho srdce bylo stále kamenné. V jedné hluboké propasti posadil mudrc draka na dno. „Odsud už můžeš jen odletět, jinak to nejde," řekl mu. „Proměň svým vnitřním ohněm své kamenné srdce na zářící diamant," řekl mudrc drakovi a odešel.</p>
+              <p>Drak Happík seděl v temnotě propasti několik dní. Byl zoufalý. Jeho srdce bylo buď kamenné, pokud hřál drak málo, nebo lávové, pokud hřál moc. Drak se den za dnem učil hřát tak akorát.</p>
+              <p>Jednoho dne se mu to opravdu povedlo — na krátkou chvíli změnil své srdce na zářící diamant. Světlo se rozlilo drakovým tělem. Drak roztáhl křídla, mávnul a… vyletěl z propasti ven.</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="accordion-item">
+          <button class="accordion-toggle" aria-expanded="false">
+            <span class="accordion-toggle-title">Epilog</span>
+            <span class="accordion-icon">+</span>
+          </button>
+          <div class="accordion-body">
+            <div class="accordion-body-inner">
+              <p class="epilog">
+                Dráčku, draku, ty můj brachu<br>
+                vidím v tobě fůru strachu<br>
+                mávni křídly, začni létat<br>
+                i když nemusíš tak spěchat.<br><br>
+                Strach se ztratí musíš počkat<br>
+                i když nemůžeš se dočkat<br>
+                poznání ti neuletí<br>
+                najdi všechno svoje smetí.<br><br>
+                Srdce z kamene jsi měl<br>
+                s ním si nikam neletěl<br>
+                nyní už je svět tvůj jasný<br>
+                diamant tu svítí krásný.<br><br>
+                Ohnivá je tvoje síla<br>
+                ať je laskavá a milá<br>
+                ve svém srdci sílu hledej<br>
+                nikdy zastrašit se nedej.<br><br>
+                Říkám to teď nejen tobě<br>
+                jistotu si najdi v sobě<br>
+                spokojenost přijde za ní<br>
+                to je celé moje přání.
+              </p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- KONTAKT -->
   <section id="contact">
     <div class="container">
       <div class="contact-inner">
         <div class="contact-info">
-          <div class="section-label">Kontakt</div>
-          <h2 class="section-title">Ozvěte se mi</h2>
-          <p>Máte zájem o spolupráci nebo chcete zjistit více informací? Neváhejte mě kontaktovat.</p>
-          <div class="contact-item">
-            <span>📧</span>
-            <a href="mailto:radek@radekdobias.cz">radek@radekdobias.cz</a>
-          </div>
-          <div class="contact-item">
-            <span>🌐</span>
-            <span>radekdobias.cz</span>
-          </div>
-          <div class="contact-item">
-            <span>📞</span>
-            <a href="tel:+420602318976">+420 602 318 976</a>
-          </div>
-          <div class="contact-item">
-            <span>📍</span>
-            <span>Česká republika</span>
+          <div class="section-label reveal">Kontakt</div>
+          <h2 class="section-title reveal">Ozvěte se.</h2>
+          <p class="reveal">Máte zájem o spolupráci, konzultaci nebo jen chcete říct ahoj? Napište nebo zavolejte.</p>
+          <div class="reveal reveal-d1">
+            <div class="contact-item">
+              <span class="contact-label">E-mail</span>
+              <a href="mailto:radek@radekdobias.cz">radek@radekdobias.cz</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Telefon</span>
+              <a href="tel:+420602318976">+420 602 318 976</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">LinkedIn</span>
+              <a href="https://linkedin.com/in/radekdobias" target="_blank" rel="noopener">linkedin.com/in/radekdobias</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Facebook</span>
+              <a href="https://facebook.com/radekdobias" target="_blank" rel="noopener">facebook.com/radekdobias</a>
+            </div>
+            <div class="contact-item">
+              <span class="contact-label">Místo</span>
+              <span>Praha</span>
+            </div>
           </div>
         </div>
-        <form id="contact-form">
+
+        <form id="contact-form" class="reveal reveal-d2">
           <div class="form-group">
             <label for="form-name">Jméno</label>
             <input type="text" id="form-name" placeholder="Vaše jméno" autocomplete="name" required />
@@ -565,10 +929,10 @@
           </div>
           <div class="form-group">
             <label for="form-message">Zpráva</label>
-            <textarea id="form-message" placeholder="Vaše zpráva" required></textarea>
+            <textarea id="form-message" placeholder="Vaše zpráva..." required></textarea>
           </div>
-          <button type="submit" id="form-submit" class="btn btn-primary">Odeslat zprávu</button>
-          <div id="form-status" style="display:none;margin-top:0.75rem;padding:0.8rem 1rem;border-radius:8px;font-size:0.95rem;"></div>
+          <button type="submit" id="form-submit" class="btn-send">Odeslat zprávu</button>
+          <div id="form-status" style="display:none;margin-top:0.5rem;font-size:0.9rem;"></div>
         </form>
       </div>
     </div>
@@ -576,10 +940,22 @@
 
   <!-- FOOTER -->
   <footer>
-    <p>&copy; 2026 Radek Dobiáš &nbsp;·&nbsp; <a href="https://radekdobias.cz">radekdobias.cz</a></p>
+    <span>&copy; 2026 Radek Dobiáš</span>
+    <a href="https://radekdobias.cz">radekdobias.cz</a>
   </footer>
 
   <script>
+    // Nav border pri scrollu
+    var mainNav = document.getElementById('main-nav');
+    window.addEventListener('scroll', function() {
+      mainNav.classList.toggle('scrolled', window.scrollY > 30);
+    }, { passive: true });
+
+    // Hero stagger animace po nacteni stranky
+    window.addEventListener('load', function() {
+      document.getElementById('hero-text').classList.add('loaded');
+    });
+
     // Hamburger menu
     var toggle = document.querySelector('.nav-toggle');
     var menu = document.getElementById('nav-menu');
@@ -614,7 +990,42 @@
 
     sections.forEach(function(s) { spy.observe(s); });
 
-    // Contact form
+    // Reveal animace pri scrollu
+    var reveals = document.querySelectorAll('.reveal');
+    var revealObs = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('visible');
+          revealObs.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    reveals.forEach(function(el) { revealObs.observe(el); });
+
+    // Accordion
+    document.querySelectorAll('.accordion-toggle').forEach(function(btn) {
+      btn.addEventListener('click', function() {
+        var item = btn.closest('.accordion-item');
+        var body = item.querySelector('.accordion-body');
+        var isOpen = item.classList.contains('open');
+
+        // Zavre vsechny ostatni
+        document.querySelectorAll('.accordion-item.open').forEach(function(openItem) {
+          openItem.classList.remove('open');
+          openItem.querySelector('.accordion-body').style.maxHeight = null;
+          openItem.querySelector('.accordion-toggle').setAttribute('aria-expanded', 'false');
+        });
+
+        if (!isOpen) {
+          item.classList.add('open');
+          body.style.maxHeight = body.scrollHeight + 'px';
+          btn.setAttribute('aria-expanded', 'true');
+        }
+      });
+    });
+
+    // Kontaktni formular AJAX
     document.getElementById('contact-form').addEventListener('submit', function(e) {
       e.preventDefault();
       var btn = document.getElementById('form-submit');
@@ -632,19 +1043,15 @@
         .then(function(r) { return r.json(); })
         .then(function(res) {
           if (res.ok) {
-            status.style.background = 'rgba(79,142,247,0.12)';
-            status.style.border = '1px solid rgba(79,142,247,0.3)';
-            status.style.color = '#4f8ef7';
-            status.textContent = '✓ Zpráva byla odeslána. Ozvu se co nejdříve!';
+            status.style.color = '#3a6a3a';
+            status.textContent = '✓ Zpráva odeslána. Ozvu se co nejdříve.';
             document.getElementById('contact-form').reset();
           } else {
             throw new Error(res.error || 'Chyba');
           }
         })
         .catch(function() {
-          status.style.background = 'rgba(220,53,69,0.12)';
-          status.style.border = '1px solid rgba(220,53,69,0.3)';
-          status.style.color = '#f07070';
+          status.style.color = '#b03030';
           status.textContent = '✗ Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.';
         })
         .finally(function() {

@@ -1,5 +1,22 @@
 # Portfolio – Radek Dobiáš
 
+## Kdo jsem
+Nejsem programátor. Popisuju, co chci. Ty to implementuješ.
+
+## Jak pracujeme
+Komunikuj česky. Kód piš anglicky. Komentáře česky bez diakritiky.
+Než začneš měnit cokoliv, napiš plán a počkej na moje OK.
+Po každé změně ověř, že projekt funguje.
+Pokud si nejsi jistý, zeptej se. Nehádej.
+Eviduj změny, piš dokumentaci a udržuj README.md soubor.
+README.md obsahuje údaje o projektu a jeho funkcích.
+
+## Co nedělej
+Neměň soubory, které fungují.
+Nepřidávej funkce, o které jsem nepožádal.
+Nepiš mi kód do chatu. Rovnou ho ukládej do souborů.
+Nedělej velké změny najednou. Postupuj po malých krocích.
+
 ## Co je tento projekt
 Osobní portfolio web pro Radka Dobiáše – terapeuta, konzultanta a odborníka na železniční technologie.
 
